@@ -53,7 +53,8 @@ public class ToDoController {
 
 	@PostMapping("add-todo")
 	public String addNewToDoItem(ModelMap model, @Valid ToDo todo, BindingResult result) {
-		this.toDoService.addToDo(getLoggedInUserName(), todo.getDescription(), todo.getTargetDate(), false);
+		todo.setUsername(getLoggedInUserName());
+		toDoRepository.save(todo);
 		return "redirect:todo-list";
 	}
 
