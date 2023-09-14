@@ -1,7 +1,7 @@
 package com.todo.controller;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import static com.todo.security.SecurityUtilities.getLoggedInUserName;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,10 +16,5 @@ public class WelcomeController {
 	public String gotToWelcomePage(ModelMap model) {
 		model.put("name", getLoggedInUserName());
 		return "welcome";
-	}
-	
-	private String getLoggedInUserName() {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		return authentication.getName();
 	}
 }
