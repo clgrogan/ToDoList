@@ -14,31 +14,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.todo.model.ToDo;
-import com.todo.service.ToDoRepository;
 import com.todo.service.ToDoService;
 
 import jakarta.validation.Valid;
 
-@Controller
+//@Controller
 @SessionAttributes("name")
-public class ToDoController {
+public class ToDoControllerOld {
 
 	private ToDoService toDoService;
-	private ToDoRepository toDoRepository;
-	
 
-	public ToDoController(ToDoService toDoService, ToDoRepository toDoRepository) {
+	public ToDoControllerOld(ToDoService toDoService) {
 		super();
 		this.toDoService = toDoService;
-		this.toDoRepository = toDoRepository;
 	}
 
 	@GetMapping("todo-list")
 	public String listAllToDos(ModelMap model) {
-//		List<ToDo> todos = toDoService.findByUsername(getLoggedInUserName());
-		
-		List<ToDo> todos = toDoRepository.findByUsername(getLoggedInUserName());
-		
+		List<ToDo> todos = toDoService.findByUsername(getLoggedInUserName());
 		model.addAttribute("todos", todos);
 		return "listToDos";
 	}
@@ -59,7 +52,7 @@ public class ToDoController {
 
 	@GetMapping("delete-todo")
 	public String deleteToDo(@RequestParam int id) {
-		toDoRepository.deleteById(id);
+		this.toDoService.deleteById(id);
 		return "redirect:todo-list";
 	}
 

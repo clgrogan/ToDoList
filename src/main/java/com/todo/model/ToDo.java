@@ -18,6 +18,9 @@ public class ToDo {
 	private LocalDate targetDate;
 	private boolean complete;
 	
+	public ToDo() {
+		super();
+	}
 	public ToDo(int id, String username, String description, LocalDate targetDate, boolean complete) {
 		super();
 		this.id = id;
@@ -26,6 +29,7 @@ public class ToDo {
 		this.targetDate = targetDate;
 		this.complete = complete;
 	}
+	
 	public int getId() {
 		return id;
 	}
