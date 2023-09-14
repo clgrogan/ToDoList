@@ -2,12 +2,19 @@ package com.todo.model;
 
 import java.time.LocalDate;
 
-import jakarta.validation.constraints.Size;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 
+@Entity(name="TODO")
 public class ToDo {
+	@Id
+	@GeneratedValue
 	private int id;
 	private String username;
 	private String description;
+	@Column(name="TARGETDATE")
 	private LocalDate targetDate;
 	private boolean complete;
 	
