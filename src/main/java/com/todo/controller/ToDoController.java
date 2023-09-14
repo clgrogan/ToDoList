@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.todo.model.ToDo;
 import com.todo.service.ToDoRepository;
-import com.todo.service.ToDoService;
 
 import jakarta.validation.Valid;
 
@@ -23,19 +22,16 @@ import jakarta.validation.Valid;
 @SessionAttributes("name")
 public class ToDoController {
 
-	private ToDoService toDoService;
 	private ToDoRepository toDoRepository;
 	
 
-	public ToDoController(ToDoService toDoService, ToDoRepository toDoRepository) {
+	public ToDoController(ToDoRepository toDoRepository) {
 		super();
-		this.toDoService = toDoService;
 		this.toDoRepository = toDoRepository;
 	}
 
 	@GetMapping("todo-list")
 	public String listAllToDos(ModelMap model) {
-//		List<ToDo> todos = toDoService.findByUsername(getLoggedInUserName());
 		
 		List<ToDo> todos = toDoRepository.findByUsername(getLoggedInUserName());
 		
@@ -66,16 +62,15 @@ public class ToDoController {
 
 	@GetMapping("update-todo")
 	public String updateToDo(@RequestParam int id, ModelMap model) {
-		ToDo todo = toDoService.getById(id);
+		ToDo todo = toDoRepository.getById(id);
 		model.put("todo", todo);
-		toDoService.updateToDo(todo);
 		return "todo";
 	}
 
 	@PostMapping("update-todo")
 	public String updateToDoItem(ModelMap model, @Valid ToDo todo, BindingResult result) {
 		todo.setUsername(getLoggedInUserName());
-		toDoService.updateToDo(todo);
+		toDoRepository.save(todo);
 		return "redirect:todo-list";
 	}
 
