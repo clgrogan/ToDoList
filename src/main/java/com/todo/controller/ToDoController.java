@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.todo.models.ToDo;
+import com.todo.model.ToDo;
 import com.todo.service.ToDoService;
 
 import jakarta.validation.Valid;

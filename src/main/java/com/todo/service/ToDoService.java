@@ -9,7 +9,7 @@ import java.util.function.Predicate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.todo.models.ToDo;
+import com.todo.model.ToDo;
 
 @Service
 @SessionAttributes("name")
